@@ -1,4 +1,10 @@
+import NotesList from "./components/Notes/NotesList.jsx";
+
 function App() {
-  return <h1>Hello world!</h1>
+  return (
+    <main>
+      <NotesList />
+    </main>
+  );
 }
 export default App
