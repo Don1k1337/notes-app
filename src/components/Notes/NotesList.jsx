@@ -1,11 +1,13 @@
 import {Note} from "./Note.jsx";
-import classes from './NotesList.module.css'
 import AddNewNote from "./AddNewNote.jsx";
+import Modal from "../Modals/Modal.jsx";
 import {useState} from "react";
+import classes from './NotesList.module.css';
 
 function NotesList() {
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('');
+    const [modalIsVisible, setModalIsVisible] = useState(true);
     function changeBodyHandler(e) {
         setBody(e.target.value)
     }
@@ -13,12 +15,20 @@ function NotesList() {
         setAuthor(e.target.value)
     }
 
+    function hideModalHandler() {
+        setModalIsVisible(false)
+    }
+
     return (
         <>
-            <AddNewNote
-                onChangeBody={changeBodyHandler}
-                onChangeAuthor={changeAuthorHandler}
-            />
+            { modalIsVisible &&
+                <Modal onHideModal={hideModalHandler}>
+                    <AddNewNote
+                        onChangeBody={changeBodyHandler}
+                        onChangeAuthor={changeAuthorHandler}
+                    />
+                </Modal>
+            }
             <ul className={classes.notes}>
                 <Note author={author} body={body} />
             </ul>
