@@ -3,3 +3,9 @@ export function hideModalHandler(setter) {
         setter(false)
     }
 }
+
+export function showModalHandler(setter) {
+    return() => {
+        setter(true)
+    }
+}
