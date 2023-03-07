@@ -1,13 +1,10 @@
 import {Note} from "./Note.jsx";
-import AddNewNote from "./AddNewNote.jsx";
-import Modal from "../Modals/Modal.jsx";
 import classes from './NotesList.module.css';
 import instance from "../../axios/fetchData.js";
 import AppSpinner from "../Spinners/AppSpinner.jsx";
-import {useQuery, useQueryClient} from 'react-query'
+import {useQuery} from 'react-query'
 
-function NotesList({isModalVisible, onStopNote}) {
-    const queryClient = useQueryClient()
+function NotesList() {
     const { data: notes = [], isLoading, isError, refetch } = useQuery(
         'notes',
         fetchNotes,
@@ -26,22 +23,9 @@ function NotesList({isModalVisible, onStopNote}) {
             throw e
         }
     }
-    async function addNewNote(data) {
-        try {
-            await instance.post('/notes.json', data);
-            await queryClient.invalidateQueries('notes')
-            await queryClient.refetchQueries('notes')
-        } catch(e) {
-            console.error("Error caused during POST", e);
-        }
-    }
+
     return (
         <>
-            {isModalVisible && (
-                <Modal onHideModal={onStopNote}>
-                    <AddNewNote onCancel={onStopNote} onAddNote={addNewNote} />
-                </Modal>
-            )}
             <ul className={classes.notes}>
                 {notes.map((note) => {
                     return <Note key={`note-${note.id}`} author={note.author} body={note.body} />;

@@ -1,9 +1,10 @@
 import classes from './Modal.module.css';
-
-function Modal({children, onHideModal}) {
+import {useCustomNavigate} from "../../hooks/useCustomNavigate.js";
+function Modal({children}) {
+    const navigateToHome = useCustomNavigate('/')
     return (
         <>
-            <div className={classes.backdrop} onClick={onHideModal}/>
+            <div className={classes.backdrop} onClick={navigateToHome}/>
             <dialog open
                     className={classes.modal}>{children}
             </dialog>

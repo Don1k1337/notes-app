@@ -1,7 +1,8 @@
 import { MdPostAdd, MdMessage } from 'react-icons/md';
+import { Link } from 'react-router-dom';
 import classes from './MainHeader.module.css';
 
-function MainHeader({ onCreateNote }) {
+function MainHeader() {
     return (
         <header className={classes.header}>
             <h1 className={classes.logo}>
@@ -9,11 +10,11 @@ function MainHeader({ onCreateNote }) {
                 Notes
             </h1>
             <p>
-                <button className={classes.button}
-                        onClick={onCreateNote}>
-                    <MdPostAdd size={18} />
-                    Add One
-                </button>
+
+                     <Link to={`/create`} className={classes.button}>
+                        <MdPostAdd size={18} />
+                        Add One
+                    </Link>
             </p>
         </header>
     );
