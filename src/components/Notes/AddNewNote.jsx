@@ -1,20 +1,19 @@
 import classes from './AddNewNote.module.css';
 import { useState } from "react";
 import { handleChange } from "../../utils/formUtils.js";
+import {useMutation} from "react-query";
 
 function AddNewNote({ onCancel, onAddNote }) {
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('');
+    const { mutate } = useMutation((data) => {
+        return onAddNote(data)
+    }, { onSuccess: () => onCancel()})
 
     async function submitForm(e) {
         e.preventDefault();
-        const data = {
-            body: body,
-            author: author
-        };
         try {
-            await onAddNote(data);
-            onCancel();
+            await mutate({ body, author })
         } catch (error) {
             console.error("Error adding new note:", error);
         }

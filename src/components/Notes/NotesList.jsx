@@ -4,13 +4,15 @@ import Modal from "../Modals/Modal.jsx";
 import classes from './NotesList.module.css';
 import instance from "../../axios/fetchData.js";
 import AppSpinner from "../Spinners/AppSpinner.jsx";
-import {useQuery} from 'react-query'
+import {useQuery, useQueryClient} from 'react-query'
 
 function NotesList({isModalVisible, onStopNote}) {
+    const queryClient = useQueryClient()
     const { data: notes = [], isLoading, isError, refetch } = useQuery(
         'notes',
         fetchNotes,
-        {retry: 3})
+        {retry: 1, refetchOnWindowFocus: false, keepPreviousData: true})
+
     async function fetchNotes() {
         try {
             const res = await instance.get('/notes.json');
@@ -27,7 +29,8 @@ function NotesList({isModalVisible, onStopNote}) {
     async function addNewNote(data) {
         try {
             await instance.post('/notes.json', data);
-            await refetch()
+            await queryClient.invalidateQueries('notes')
+            await queryClient.refetchQueries('notes')
         } catch(e) {
             console.error("Error caused during POST", e);
         }
@@ -49,8 +52,7 @@ function NotesList({isModalVisible, onStopNote}) {
                     <h2>No notes have been added yet.</h2>
                     <p>Click on a button to add one.</p>
                 </div>
-            )
-            }
+            )}
             {isError && (
                 <div className={classes.empty}>
                     <p>Seems to be error caused on server-side</p>
