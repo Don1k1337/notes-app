@@ -44,6 +44,13 @@ function NotesList({isModalVisible, onStopNote}) {
                     return <Note key={`note-${note.id}`} author={note.author} body={note.body} />;
                 })}
             </ul>
+            {notes.length === 0 && (
+                <div className={classes.empty}>
+                    <h2>No notes have been added yet.</h2>
+                    <p>Click on a button to add one.</p>
+                </div>
+            )
+            }
             {isError && (
                 <div className={classes.empty}>
                     <p>Seems to be error caused on server-side</p>
