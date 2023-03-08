@@ -35,7 +35,7 @@ function AddNewNote() {
     }
 
     return (
-        <Modal >
+        <Modal>
             <Form method="post" className={classes.form} onSubmit={submitForm}>
                 <p>
                     <label htmlFor="body">Text</label>

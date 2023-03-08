@@ -28,7 +28,7 @@ function NotesList() {
         <>
             <ul className={classes.notes}>
                 {notes.map((note) => {
-                    return <Note key={`note-${note.id}`} author={note.author} body={note.body} />;
+                    return <Note key={`note-${note.id}`} id={note.id} author={note.author} body={note.body} />;
                 })}
             </ul>
             {notes.length === 0 && (
