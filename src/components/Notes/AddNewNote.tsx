@@ -6,28 +6,26 @@ import Modal from "../Modals/Modal";
 import {Form, Link} from "react-router-dom";
 import instance from "../../axios/fetchData";
 import {useCustomNavigate} from "../../hooks/useCustomNavigate";
+import {INoteData} from "../../types/noteInterfaces";
 
 const AddNewNote: React.FC = () => {
     const navigateToHome = useCustomNavigate('/')
     const queryClient = useQueryClient();
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('');
-    const { mutate } = useMutation((data: IResponseData) => {
+    const { mutate } = useMutation((data: INoteData) => {
         return addNewNote(data);
     }, { onSuccess: navigateToHome,
                  onError: error => console.error(error)
     });
 
-    interface IResponseData {
-        author: string;
-        body: string;
-    }
-    async function addNewNote(data: IResponseData): Promise<IResponseData> {
+
+    async function addNewNote(data: INoteData): Promise<INoteData> {
         try {
             const response = await instance.post('/notes.json', data);
             await queryClient.invalidateQueries('notes')
             await queryClient.refetchQueries('notes')
-            return response.data as IResponseData;
+            return response.data as INoteData;
         } catch(e) {
             console.error("Error caused during POST", e);
             throw e;

@@ -3,14 +3,10 @@ import { useLoaderData, Link, LoaderFunction } from 'react-router-dom';
 import Modal from '../Modals/Modal';
 import classes from './NoteDetail.module.css';
 import instance from '../../axios/fetchData';
-
-interface INoteDetail {
-    author: string;
-    body: string;
-}
+import {INoteData} from "../../types/noteInterfaces";
 
 const NoteDetail: React.FC = () => {
-    const note = useLoaderData() as INoteDetail;
+    const note = useLoaderData() as INoteData;
     if (!note) {
         return (
             <Modal>

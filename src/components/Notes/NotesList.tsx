@@ -4,23 +4,18 @@ import instance from "../../axios/fetchData";
 import AppSpinner from "../Spinners/AppSpinner";
 import {useQuery} from 'react-query'
 import React from "react";
+import {INoteData} from "../../types/noteInterfaces";
 
 const NotesList: React.FC = () => {
-    interface INoteList {
-        id: string;
-        author: string;
-        body: string;
-    }
-
-    const { data: notes = [], isLoading, isError, refetch } = useQuery<INoteList[]>(
+    const { data: notes = [], isLoading, isError, refetch } = useQuery<INoteData[]>(
         'notes',
         fetchNotes,
         {retry: 1, refetchOnWindowFocus: false, keepPreviousData: true})
 
-    async function fetchNotes(): Promise<INoteList[]> {
+    async function fetchNotes(): Promise<INoteData[]> {
         try {
             const res = await instance.get('/notes.json');
-            const fetchedData: INoteList[] = [];
+            const fetchedData: INoteData[] = [];
             for (const key in res.data) {
                 fetchedData.push({id: key, ...res.data[key]});
             }
