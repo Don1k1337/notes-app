@@ -4,7 +4,7 @@ import { handleChange } from "../../utils/formUtils.js";
 import {useMutation, useQueryClient} from "react-query";
 import Modal from "../Modals/Modal.tsx";
 import {Form, Link} from "react-router-dom";
-import instance from "../../axios/fetchData.js";
+import instance from "../../axios/fetchData.ts";
 import {useCustomNavigate} from "../../hooks/useCustomNavigate.js";
 
 function AddNewNote() {

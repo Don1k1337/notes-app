@@ -1,6 +1,6 @@
 import {Note} from "./Note.tsx";
 import classes from './NotesList.module.css';
-import instance from "../../axios/fetchData.js";
+import instance from "../../axios/fetchData.ts";
 import AppSpinner from "../Spinners/AppSpinner.jsx";
 import {useQuery} from 'react-query'
 
