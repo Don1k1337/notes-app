@@ -1,4 +1,4 @@
-import NotesList from "../components/Notes/NotesList.jsx";
+import NotesList from "../components/Notes/NotesList";
 import {Outlet} from "react-router-dom";
 function App() {
   return (

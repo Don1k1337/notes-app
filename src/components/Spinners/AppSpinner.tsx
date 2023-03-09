@@ -1,6 +1,7 @@
 import classes from './AppSpinner.module.css'
+import React from "react";
 
-function AppSpinner() {
+const AppSpinner: React.FC = () => {
     return <>
         <div className={classes.container}>
             <span className={classes.loader}></span>

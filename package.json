@@ -16,8 +16,7 @@
     "react-dom": "^18.2.0",
     "react-icons": "^4.8.0",
     "react-query": "^3.39.3",
-    "react-router-dom": "^6.8.2",
-    "slugify": "^1.6.5"
+    "react-router-dom": "^6.8.2"
   },
   "devDependencies": {
     "@types/jest": "^29.4.0",

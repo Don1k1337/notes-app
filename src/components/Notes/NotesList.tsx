@@ -1,19 +1,26 @@
-import {Note} from "./Note.tsx";
+import {Note} from "./Note";
 import classes from './NotesList.module.css';
-import instance from "../../axios/fetchData.ts";
-import AppSpinner from "../Spinners/AppSpinner.jsx";
+import instance from "../../axios/fetchData";
+import AppSpinner from "../Spinners/AppSpinner";
 import {useQuery} from 'react-query'
+import React from "react";
 
-function NotesList() {
-    const { data: notes = [], isLoading, isError, refetch } = useQuery(
+const NotesList: React.FC = () => {
+    interface INoteList {
+        id: string;
+        author: string;
+        body: string;
+    }
+
+    const { data: notes = [], isLoading, isError, refetch } = useQuery<INoteList[]>(
         'notes',
         fetchNotes,
         {retry: 1, refetchOnWindowFocus: false, keepPreviousData: true})
 
-    async function fetchNotes() {
+    async function fetchNotes(): Promise<INoteList[]> {
         try {
             const res = await instance.get('/notes.json');
-            const fetchedData = [];
+            const fetchedData: INoteList[] = [];
             for (const key in res.data) {
                 fetchedData.push({id: key, ...res.data[key]});
             }
@@ -40,7 +47,10 @@ function NotesList() {
             {isError && (
                 <div className={classes.empty}>
                     <p>Seems to be error caused on server-side</p>
-                    <button onClick={refetch}>Retry</button>
+                    <button
+                        onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => refetch}>
+                        Retry
+                    </button>
                 </div>
             )}
             {isLoading && <AppSpinner />}

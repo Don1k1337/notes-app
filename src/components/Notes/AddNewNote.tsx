@@ -1,31 +1,39 @@
 import classes from './AddNewNote.module.css';
-import { useState } from "react";
-import { handleChange } from "../../utils/formUtils.js";
+import React, { useState } from "react";
+import { handleChange } from "../../utils/formUtils";
 import {useMutation, useQueryClient} from "react-query";
-import Modal from "../Modals/Modal.tsx";
+import Modal from "../Modals/Modal";
 import {Form, Link} from "react-router-dom";
-import instance from "../../axios/fetchData.ts";
-import {useCustomNavigate} from "../../hooks/useCustomNavigate.js";
+import instance from "../../axios/fetchData";
+import {useCustomNavigate} from "../../hooks/useCustomNavigate";
 
-function AddNewNote() {
+const AddNewNote: React.FC = () => {
     const navigateToHome = useCustomNavigate('/')
     const queryClient = useQueryClient();
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('');
-    const { mutate } = useMutation((data) => {
-        return addNewNote(data)
-    }, { onSuccess: navigateToHome })
+    const { mutate } = useMutation((data: responseData) => {
+        return addNewNote(data);
+    }, { onSuccess: navigateToHome,
+                 onError: error => console.error(error)
+    });
 
-    async function addNewNote(data) {
+    interface responseData {
+        author: string;
+        body: string;
+    }
+    async function addNewNote(data: responseData): Promise<responseData> {
         try {
-            await instance.post('/notes.json', data);
+            const response = await instance.post('/notes.json', data);
             await queryClient.invalidateQueries('notes')
             await queryClient.refetchQueries('notes')
+            return response.data as responseData;
         } catch(e) {
             console.error("Error caused during POST", e);
+            throw e;
         }
     }
-    async function submitForm(e) {
+    async function submitForm(e: React.FormEvent<HTMLFormElement>) {
         e.preventDefault();
         try {
             await mutate({ body, author })

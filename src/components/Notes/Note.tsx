@@ -1,12 +1,11 @@
 import classes from './Note.module.css'
 import {Link} from "react-router-dom";
-import slugify from "slugify";
 import React from "react";
-
+import slugify from "slugify";
 interface INote {
-    id: string,
-    author: string,
-    body: string
+    id: string;
+    author: string;
+    body: string;
 }
 
 export const Note: React.FC<INote> = ({ id, author, body }) => {

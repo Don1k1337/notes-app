@@ -1,6 +1,6 @@
 import React from "react";
 import classes from './Modal.module.css';
-import {useCustomNavigate} from "../../hooks/useCustomNavigate.js";
+import {useCustomNavigate} from "../../hooks/useCustomNavigate";
 
 type ModalProps = {
     children: React.ReactNode
