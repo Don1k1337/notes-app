@@ -1,6 +1,6 @@
 # Notes App
 
-Notes App is a web application built using HTML, CSS, React.js, React Router, React Query, Axios, and Firebase.
+Notes App is a web application built using HTML, CSS, TypeScript, React, React Router, React Query, Axios, and Firebase.
 
 ## Installation
 
@@ -12,6 +12,7 @@ Notes App is a web application built using HTML, CSS, React.js, React Router, Re
 
 - HTML
 - CSS
+- TypeScript
 - React.js
 - React Router
 - React Query

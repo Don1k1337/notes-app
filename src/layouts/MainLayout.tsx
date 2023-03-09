@@ -1,4 +1,4 @@
-import MainHeader from "../components/MainHeader.js";
+import MainHeader from "../components/MainHeader";
 import {Outlet} from "react-router-dom";
 
 function MainLayout() {

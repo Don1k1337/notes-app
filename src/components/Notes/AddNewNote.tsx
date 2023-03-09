@@ -12,22 +12,22 @@ const AddNewNote: React.FC = () => {
     const queryClient = useQueryClient();
     const [body, setBody] = useState('');
     const [author, setAuthor] = useState('');
-    const { mutate } = useMutation((data: responseData) => {
+    const { mutate } = useMutation((data: IResponseData) => {
         return addNewNote(data);
     }, { onSuccess: navigateToHome,
                  onError: error => console.error(error)
     });
 
-    interface responseData {
+    interface IResponseData {
         author: string;
         body: string;
     }
-    async function addNewNote(data: responseData): Promise<responseData> {
+    async function addNewNote(data: IResponseData): Promise<IResponseData> {
         try {
             const response = await instance.post('/notes.json', data);
             await queryClient.invalidateQueries('notes')
             await queryClient.refetchQueries('notes')
-            return response.data as responseData;
+            return response.data as IResponseData;
         } catch(e) {
             console.error("Error caused during POST", e);
             throw e;
