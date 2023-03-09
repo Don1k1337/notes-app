@@ -48,7 +48,7 @@ const NotesList: React.FC = () => {
                 <div className={classes.empty}>
                     <p>Seems to be error caused on server-side</p>
                     <button
-                        onClick={(e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => refetch}>
+                        onClick={() => refetch}>
                         Retry
                     </button>
                 </div>

@@ -4,13 +4,13 @@ import Modal from '../Modals/Modal';
 import classes from './NoteDetail.module.css';
 import instance from '../../axios/fetchData';
 
-interface Note {
+interface INoteDetail {
     author: string;
     body: string;
 }
 
 const NoteDetail: React.FC = () => {
-    const note = useLoaderData() as Note;
+    const note = useLoaderData() as INoteDetail;
     if (!note) {
         return (
             <Modal>
