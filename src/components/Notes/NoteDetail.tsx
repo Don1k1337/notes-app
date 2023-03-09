@@ -1,11 +1,16 @@
-import { useLoaderData, Link } from 'react-router-dom';
-import Modal from '../Modals/Modal.jsx';
+import React from "react";
+import { useLoaderData, Link, LoaderFunction } from 'react-router-dom';
+import Modal from '../Modals/Modal';
 import classes from './NoteDetail.module.css';
-import instance from '../../axios/fetchData.js';
+import instance from '../../axios/fetchData';
 
-function NoteDetail() {
-    const note = useLoaderData();
+interface Note {
+    author: string;
+    body: string;
+}
 
+const NoteDetail: React.FC = () => {
+    const note = useLoaderData() as Note;
     if (!note) {
         return (
             <Modal>
@@ -34,11 +39,11 @@ function NoteDetail() {
 
 export default NoteDetail;
 
-export async function loader({ params }) {
+export const loader: LoaderFunction = async ({ params }) => {
     try {
         const { data } = await instance.get(`/notes/${params.id}.json`);
         return data;
     } catch (e) {
         console.error('Error caused during load note by id: ', e);
     }
-}
+};

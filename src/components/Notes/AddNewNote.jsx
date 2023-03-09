@@ -2,7 +2,7 @@ import classes from './AddNewNote.module.css';
 import { useState } from "react";
 import { handleChange } from "../../utils/formUtils.js";
 import {useMutation, useQueryClient} from "react-query";
-import Modal from "../Modals/Modal.jsx";
+import Modal from "../Modals/Modal.tsx";
 import {Form, Link} from "react-router-dom";
 import instance from "../../axios/fetchData.js";
 import {useCustomNavigate} from "../../hooks/useCustomNavigate.js";

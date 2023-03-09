@@ -1,8 +1,15 @@
 import classes from './Note.module.css'
 import {Link} from "react-router-dom";
 import slugify from "slugify";
+import React from "react";
 
-export function Note({id, author, body}) {
+interface INote {
+    id: string,
+    author: string,
+    body: string
+}
+
+export const Note: React.FC<INote> = ({ id, author, body }) => {
     const slug = slugify(body, {lower: true})
     return (
             <li className={classes.note}>

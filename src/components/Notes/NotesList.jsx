@@ -1,4 +1,4 @@
-import {Note} from "./Note.jsx";
+import {Note} from "./Note.tsx";
 import classes from './NotesList.module.css';
 import instance from "../../axios/fetchData.js";
 import AppSpinner from "../Spinners/AppSpinner.jsx";
