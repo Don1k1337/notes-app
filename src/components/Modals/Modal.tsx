@@ -1,10 +1,9 @@
 import React from "react";
 import classes from './Modal.module.css';
 import {useCustomNavigate} from "../../hooks/useCustomNavigate";
+import {ModalProps} from "../../types/modalTypes";
 
-type ModalProps = {
-    children: React.ReactNode
-}
+
 const Modal = ({children}: ModalProps) => {
     const navigateToHome = useCustomNavigate('/')
     return (
