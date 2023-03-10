@@ -28,7 +28,7 @@ const NotesList: React.FC = () => {
 
     return (
         <>
-            <ul className={classes.notes}>
+            <ul data-testid="notes-list" className={classes.notes}>
                 {notes.map((note) => {
                     return <Note key={`note-${note.id}`} id={note.id} author={note.author} body={note.body} />;
                 })}

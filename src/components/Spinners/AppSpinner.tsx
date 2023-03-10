@@ -3,8 +3,8 @@ import React from "react";
 
 const AppSpinner: React.FC = () => {
     return <>
-        <div className={classes.container}>
-            <span className={classes.loader}></span>
+        <div data-testid="wrapper" className={classes.container}>
+            <span data-testid="spinner" className={classes.loader}></span>
         </div>
     </>
 }

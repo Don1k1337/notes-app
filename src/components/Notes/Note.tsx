@@ -5,7 +5,7 @@ import slugify from "slugify";
 import {INoteData} from "../../types/noteInterfaces";
 
 export const Note: React.FC<INoteData> = ({ id, author, body }) => {
-    const slug = slugify(body, {lower: true})
+    const slug = slugify(body, { lower: true, replacement: '_' });
     return (
             <li className={classes.note}>
                 <Link to={`${id}/${slug}`}>
