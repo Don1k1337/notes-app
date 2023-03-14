@@ -11,7 +11,6 @@ const MainHeader: React.FC = () => {
                 Notes
             </h1>
             <p>
-
                      <Link to={`/create`} className={classes.button}>
                         <MdPostAdd size={18} />
                         Add One
