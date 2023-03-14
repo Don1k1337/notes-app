@@ -13,8 +13,10 @@ Notes App is a web application built using HTML, CSS, TypeScript, React, React R
 - HTML
 - CSS
 - TypeScript
-- React.js
+- React
 - React Router
 - React Query
+- React Testing Library
+- Jest
 - Axios
 - Firebase
